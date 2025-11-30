@@ -56,228 +56,136 @@
     </script>
         
         <!-- Custom Styles -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-        * {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        html, body {
-            overflow-x: hidden;
-            max-width: 100%;
-        }
-
-        /* Fix sections overflow */
-        section {
-            overflow-x: hidden;
-        }
-        
-        /* Custom Tailwind Configuration */
-        .text-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .bg-gradient-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-        
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .dark .glassmorphism {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Canvas for Three.js */
-        #hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        .dark ::-webkit-scrollbar-track {
-            background: #1a1a2e;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-        }
-        
-        /* Mobile menu animation */
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .mobile-menu.active {
-            max-height: 500px;
-        }
-        
-        /* Floating animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        /* Pulse animation */
-        @keyframes pulse-custom {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .pulse-custom {
-            animation: pulse-custom 2s ease-in-out infinite;
-        }
-        
-        /* Roadmap Timeline */
-        .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-            transform: translateX(-50%);
-        }
-        
-        @media (max-width: 1024px) {
-            .roadmap-timeline::before {
-                display: none;
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    
+            * {
+                font-family: 'Roboto', sans-serif;
             }
-        }
-        
-        /* Navbar fix */
-        nav {
-            background: rgba(255, 255, 255, 0.95) !important;
-        }
-        
-        .dark nav {
-            background: rgba(17, 24, 39, 0.95) !important;
-        }
-
-        /* Hero gradient that changes with dark mode */
-        .hero-gradient {
-            background: linear-gradient(to bottom right, #6366f1, #a855f7, #ec4899);
-        }
-
-        .dark .hero-gradient {
-            background: linear-gradient(to bottom right, #0a0e1a, #1a1f35, #2a3140);
-        }
-
-        /* ========================================
-        MOBILE RESPONSIVENESS FOR A56 & ALL PHONES
-        ======================================== */
-
-        /* Fix navbar buttons visibility on mobile */
-        @media (max-width: 768px) {
-        /* Make buttons bigger and more visible */
-        #theme-toggle,
-        #mobile-menu-button {
-        padding: 12px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
-        }
-
-        /* Make icons bigger */
-        #theme-toggle i,
-        #mobile-menu-button i {
-        font-size: 20px !important;
-        }
-
-        /* Reduce gap between buttons */
-        nav .flex.items-center.space-x-4 {
-        gap: 0.5rem !important;
-        }
-
-        /* Fix logo text size on small screens */
-        nav .text-xl {
-        font-size: 1.1rem !important;
-        }
-        }
-
-        /* Samsung A56 specific (portrait: 412px width) */
-        @media (min-width: 380px) and (max-width: 480px) {
-        #theme-toggle,
-        #mobile-menu-button {
-        padding: 14px !important;
-        }
-        }
-
-        /* Fix team carousel on mobile */
-        @media (max-width: 768px) {
-        #team-horizontal-carousel .flex-shrink-0 {
-        min-width: 90vw !important;
-        max-width: 90vw !important;
-        }
-        }
-
-        /* Prevent any horizontal overflow */
-        * {
-        box-sizing: border-box;
-        }
-
-        body, html {
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        }
-
-        section {
-        max-width: 100vw !important;
-        }
-
-        /* Fix container padding on very small screens */
-        @media (max-width: 640px) {
-        .max-w-7xl {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        }
-        }
-
-        /* Make hero text responsive */
-        @media (max-width: 480px) {
-        #hero h1 {
-        font-size: 2.5rem !important;
-        line-height: 1.2 !important;
-        }
-
-        #hero p {
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
-        }
-        }
-    </style>
+            
+            /* Custom Tailwind Configuration */
+            .text-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            
+            .bg-gradient-secondary {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            }
+            
+            .glassmorphism {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .dark .glassmorphism {
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Canvas for Three.js */
+            #hero-canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+            
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            
+            .dark ::-webkit-scrollbar-track {
+                background: #1a1a2e;
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 10px;
+            }
+            
+            /* Mobile menu animation */
+            .mobile-menu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                max-height: 500px;
+            }
+            
+            /* Floating animation */
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+            
+            .float-animation {
+                animation: float 3s ease-in-out infinite;
+            }
+            
+            /* Pulse animation */
+            @keyframes pulse-custom {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+            
+            .pulse-custom {
+                animation: pulse-custom 2s ease-in-out infinite;
+            }
+            
+            /* Roadmap Timeline */
+            .roadmap-timeline::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+                transform: translateX(-50%);
+            }
+            
+            @media (max-width: 1024px) {
+                .roadmap-timeline::before {
+                    display: none;
+                }
+            }
+            
+            /* Navbar fix */
+            nav {
+                background: rgba(255, 255, 255, 0.95) !important;
+            }
+            
+            .dark nav {
+                background: rgba(17, 24, 39, 0.95) !important;
+            }
+    
+            /* Hero gradient that changes with dark mode */
+            .hero-gradient {
+                background: linear-gradient(to bottom right, #6366f1, #a855f7, #ec4899);
+            }
+    
+            .dark .hero-gradient {
+                background: linear-gradient(to bottom right, #0a0e1a, #1a1f35, #2a3140);
+            }
+        </style>
 
     
 </head>
@@ -654,7 +562,7 @@
                             <i class="fas fa-star text-yellow-500 mt-1 mr-3"></i>
                             <div>
                                 <p class="font-semibold text-gray-900 dark:text-white">Combined Experience</p>
-                                <p class="text-gray-600 dark:text-gray-300">3+ years of combined experience in backend & frontend engineering, system design, AI automation, and production-grade software delivery.</p>
+                                <p class="text-gray-600 dark:text-gray-300">10+ years of combined experience in backend & frontend engineering, system design, AI automation, and production-grade software delivery.</p>
                             </div>
                         </li>
                         <li class="flex items-start">

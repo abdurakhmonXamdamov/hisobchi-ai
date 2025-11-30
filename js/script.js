@@ -443,43 +443,42 @@ function initRoadmapAnimation() {
 function initHorizontalCarousel() {
     const carousel = document.getElementById('team-horizontal-carousel');
     if (!carousel) return;
-    
-    // Clone all cards and append them to create infinite loop
+
     const cards = Array.from(carousel.children);
+    
+    // Clone cards for infinite scroll
     cards.forEach(card => {
         const clone = card.cloneNode(true);
         carousel.appendChild(clone);
     });
-    
+
     let currentPosition = 0;
-    let scrollSpeed = 1; // pixels per frame (adjust for speed)
-    const cardWidth = 320 + 32; // card width (w-80 = 320px) + gap (gap-8 = 32px)
+    let scrollSpeed = 1;
+
+    // Compute card width dynamically
+    const card = cards[0];
+    const style = getComputedStyle(card);
+    const cardWidth = card.offsetWidth + parseInt(style.marginRight) + 50;
     const totalWidth = cardWidth * cards.length;
-    
+
     function autoScroll() {
         currentPosition += scrollSpeed;
-        
-        // Reset position when first set of cards scrolls out
+
         if (currentPosition >= totalWidth) {
-            currentPosition = 0;
+            currentPosition = 0; // reset to show first card fully
         }
-        
+
         carousel.style.transform = `translateX(-${currentPosition}px)`;
         requestAnimationFrame(autoScroll);
     }
-    
-    // Pause on hover
-    carousel.addEventListener('mouseenter', () => {
-        scrollSpeed = 0;
-    });
-    
-    carousel.addEventListener('mouseleave', () => {
-        scrollSpeed = 1;
-    });
-    
-    // Start scrolling
+
+    carousel.addEventListener('mouseenter', () => scrollSpeed = 0);
+    carousel.addEventListener('mouseleave', () => scrollSpeed = 1);
+
     autoScroll();
 }
+
+
 
 console.log('🚀 Hisobchi AI - Website Loaded Successfully!');
 console.log('💡 Tip: Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
